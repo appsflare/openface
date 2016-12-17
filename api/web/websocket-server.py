@@ -50,6 +50,10 @@ import matplotlib.cm as cm
 
 import openface
 
+from repositories import IdentityImageRepository
+
+imageRepo = IdentityImageRepository()
+
 modelDir = os.path.join(fileDir, '..', '..', 'models')
 dlibModelDir = os.path.join(modelDir, 'dlib')
 openfaceModelDir = os.path.join(modelDir, 'openface')
