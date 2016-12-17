@@ -52,8 +52,6 @@ import openface
 
 from repositories import IdentityImageRepository
 
-imageRepo = IdentityImageRepository()
-
 modelDir = os.path.join(fileDir, '..', '..', 'models')
 dlibModelDir = os.path.join(modelDir, 'dlib')
 openfaceModelDir = os.path.join(modelDir, 'openface')
@@ -94,6 +92,7 @@ class Face:
 class OpenFaceServerProtocol(WebSocketServerProtocol):
 
     def __init__(self):
+        self.repo = IdentityImageRepository()
         self.images = {}
         self.training = True
         self.people = []
@@ -156,9 +155,11 @@ class OpenFaceServerProtocol(WebSocketServerProtocol):
 
         for jsImage in jsImages:
             h = jsImage['hash'].encode('ascii', 'ignore')
-            self.images[h] = Face(np.array(jsImage['representation']),
+            face = Face(np.array(jsImage['representation']),
                                   jsImage['identity'])
-
+            self.repo.add_image(jsImage['identity'],face)
+            self.images[h] = face
+        
         for jsPerson in jsPeople:
             self.people.append(jsPerson.encode('ascii', 'ignore'))
 

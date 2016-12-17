@@ -48,6 +48,7 @@ class IdentityImageRepository(object):
     def add_image(self, identity, image):
         fidentity = self.find(identity)
         if not fidentity:
+            self.add_identity(identity,[image])
             return
         fidentity.images.append(image)
 
