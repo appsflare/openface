@@ -3,7 +3,7 @@ _build
 plots
 work*
 *reps
-
+bower_components
 data
 !data/vgg/download-and-align.py
 !data/download-lfw-subset.sh

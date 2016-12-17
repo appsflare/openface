@@ -2,7 +2,7 @@
 
 set -x -e
 
-bower install
+bower install --allow-root
 
 rm -rf vendor
 mkdir -p vendor/{css,fonts,js}
